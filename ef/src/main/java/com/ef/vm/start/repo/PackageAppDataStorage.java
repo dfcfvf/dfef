@@ -8,8 +8,11 @@ import com.ef.vm.start.models.PackageAppData;
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.remote.InstalledAppInfo;
 
+import org.jdeferred.DoneCallback;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * @author Lody
@@ -36,10 +39,23 @@ public class PackageAppDataStorage {
         return data;
     }
 
-    public void acquire(Context context, String packageName, Callback<PackageAppData> callback) {
+    public void acquire(final Context context, final String packageName, final Callback<PackageAppData> callback) {
+        /*
         VUiKit.defer()
                 .when(() -> acquire(context, packageName))
                 .done(callback::callback);
+        */
+        VUiKit.defer().when(new Callable<PackageAppData>() {
+            @Override
+            public PackageAppData call() throws Exception {
+                return acquire(context, packageName);
+            }
+        }).done(new DoneCallback<PackageAppData>() {
+            @Override
+            public void onDone(PackageAppData result) {
+                callback.callback(result);
+            }
+        });
     }
 
     private PackageAppData loadAppData(Context context, String packageName) {
