@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ef.lody.virtual.R;
 import com.ef.vm.abs.ui.VActivity;
 import com.ef.vm.abs.ui.VUiKit;
 import com.ef.vm.start.models.PackageAppData;
 import com.ef.vm.start.repo.PackageAppDataStorage;
 import com.ef.vm.widgets.EatBeansView;
-import com.lody.virtual.R;
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.client.ipc.VActivityManager;
 

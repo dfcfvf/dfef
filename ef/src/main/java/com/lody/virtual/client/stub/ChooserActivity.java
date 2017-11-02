@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import com.lody.virtual.R;
+import com.ef.lody.virtual.R;
 import com.lody.virtual.client.env.Constants;
 import com.lody.virtual.helper.utils.VLog;
 import com.lody.virtual.os.VUserHandle;

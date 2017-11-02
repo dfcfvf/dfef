@@ -11,7 +11,7 @@ import android.os.Binder;
 import android.util.SparseArray;
 import android.util.Xml;
 
-import com.lody.virtual.R;
+import com.ef.lody.virtual.R;
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.client.env.Constants;
 import com.lody.virtual.helper.compat.ActivityManagerCompat;

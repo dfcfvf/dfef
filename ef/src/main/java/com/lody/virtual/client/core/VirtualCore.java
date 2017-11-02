@@ -20,7 +20,7 @@ import android.os.Looper;
 import android.os.Process;
 import android.os.RemoteException;
 
-import com.lody.virtual.R;
+import com.ef.lody.virtual.R;
 import com.lody.virtual.client.VClientImpl;
 import com.lody.virtual.client.env.Constants;
 import com.lody.virtual.client.env.VirtualRuntime;

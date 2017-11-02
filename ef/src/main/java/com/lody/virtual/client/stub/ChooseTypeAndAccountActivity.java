@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.lody.virtual.R;
+import com.ef.lody.virtual.R;
 import com.lody.virtual.client.ipc.VAccountManager;
 import com.lody.virtual.helper.utils.VLog;
 

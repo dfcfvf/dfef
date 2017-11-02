@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-import com.lody.virtual.R;
+import com.ef.lody.virtual.R;
 import com.lody.virtual.helper.utils.Reflect;
 import com.lody.virtual.helper.utils.VLog;
 
