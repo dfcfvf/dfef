@@ -29,7 +29,7 @@ public class LoadingActivity extends VActivity {
     private static final String KEY_INTENT = "KEY_INTENT";
     private static final String KEY_USER = "KEY_USER";
     private PackageAppData appModel;
-    private EatBeansView loadingView;
+    //private EatBeansView loadingView;
     private View viewload;
     private AnimationDrawable frameAnim;
 
@@ -49,7 +49,7 @@ public class LoadingActivity extends VActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
-        loadingView = (EatBeansView) findViewById(R.id.loading_anim);
+        //loadingView = (EatBeansView) findViewById(R.id.loading_anim);
         viewload = (View) findViewById(R.id.load_game_view);
         // 通过逐帧动画的资源文件获得AnimationDrawable示例
         frameAnim=(AnimationDrawable) getResources().getDrawable(R.drawable.loadinganim);
