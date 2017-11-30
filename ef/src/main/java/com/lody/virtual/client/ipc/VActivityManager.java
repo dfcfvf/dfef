@@ -59,6 +59,12 @@ public class VActivityManager {
         return mRemote;
     }
 
+    public void closeServer(){
+        synchronized (VActivityManager.class) {
+            mRemote = null;
+        }
+    }
+
 
     private Object getRemoteInterface() {
         return IActivityManager.Stub

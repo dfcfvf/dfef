@@ -262,6 +262,12 @@ public final class VirtualCore {
         return mService;
     }
 
+    public void closeServer(){
+        synchronized (this) {
+            mService = null;
+        }
+    }
+
     private Object getStubInterface() {
         return IAppManager.Stub
                 .asInterface(ServiceManagerNative.getService(ServiceManagerNative.APP));
