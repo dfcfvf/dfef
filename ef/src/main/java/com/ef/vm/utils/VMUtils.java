@@ -4,19 +4,22 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.RemoteException;
-import android.util.Log;
 
+import com.ef.vm.delegate.MyAppRequestListener;
+import com.ef.vm.delegate.MyComponentDelegate;
+import com.ef.vm.delegate.MyPhoneInfoDelegate;
+import com.ef.vm.delegate.MyTaskDescriptionDelegate;
 import com.ef.vm.start.models.AppInfo;
 import com.ef.vm.start.models.AppInfoLite;
 import com.lody.virtual.client.core.InstallStrategy;
 import com.lody.virtual.client.core.VirtualCore;
-import com.lody.virtual.client.env.VirtualRuntime;
 import com.lody.virtual.client.ipc.VActivityManager;
+import com.lody.virtual.client.stub.VASettings;
 import com.lody.virtual.remote.InstallResult;
 import com.lody.virtual.remote.InstalledAppInfo;
 
-import java.util.List;
+
+import jonathanfinerty.once.Once;
 
 /**
  * Created by admin on 2017-07-28-0028.
@@ -24,6 +27,56 @@ import java.util.List;
  */
 
 public class VMUtils {
+
+    /**
+     * 配置 VASettings
+     * @param redirect
+     * @param shorecut
+     */
+    public static void setConfig(boolean redirect, boolean shorecut){
+        VASettings.ENABLE_IO_REDIRECT = redirect;
+        VASettings.ENABLE_INNER_SHORTCUT = shorecut;
+    }
+
+    /**
+     * VA startup
+     * @param context
+     */
+    public static void startup(Context context){
+        try {
+            VirtualCore.get().startup(context);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * VA init
+     * @param context
+     */
+    public static void initVirtual(final Context context) {
+        final VirtualCore virtualCore = VirtualCore.get();
+        virtualCore.initialize(new VirtualCore.VirtualInitializer() {
+            @Override
+            public void onMainProcess() {
+                Once.initialise(context);
+            }
+
+            @Override
+            public void onVirtualProcess() {
+                virtualCore.setComponentDelegate(new MyComponentDelegate());
+                //fake phone imei,macAddress,BluetoothAddress
+                virtualCore.setPhoneInfoDelegate(new MyPhoneInfoDelegate());
+                //fake task description's icon and title
+                virtualCore.setTaskDescriptionDelegate(new MyTaskDescriptionDelegate());
+            }
+
+            @Override
+            public void onServerProcess() {
+                virtualCore.setAppRequestListener(new MyAppRequestListener(context));
+            }
+        });
+    }
 
     /**
      * 判断是否安装
@@ -45,7 +98,7 @@ public class VMUtils {
      * @param packageName
      * @return
      */
-    public boolean isAppRunning(String packageName) {
+    public static boolean isAppRunning(String packageName) {
         try{
             return VirtualCore.get().isAppRunning(packageName, 0);
         }catch (Exception e){
