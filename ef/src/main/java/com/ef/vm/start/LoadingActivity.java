@@ -62,7 +62,12 @@ public class LoadingActivity extends VActivity {
         iconView.setImageDrawable(appModel.icon);
         TextView nameView = (TextView) findViewById(R.id.app_name);
         //nameView.setText(String.format(Locale.ENGLISH, R.string.is_qidong+" %s...", appModel.name));
-        nameView.setText("正在启动..."+appModel.name);
+        //nameView.setText("正在启动..."+appModel.name);
+        if(appModel.name.contains("com.")){
+            nameView.setText("如果启动失败：需要您使用自己的账号打开游戏玩一局，再使用租号玩/手游上号器进行自动上号操作");
+        }else {
+            nameView.setText("正在启动..."+appModel.name);
+        }
         final Intent intent = getIntent().getParcelableExtra(KEY_INTENT);
         if (intent == null) {
             return;
